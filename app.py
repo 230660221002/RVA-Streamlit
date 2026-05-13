@@ -33,8 +33,24 @@ st.subheader("Analisis Regresi Linear")
 X = df[["Jumlah Terjual", "Jumlah Ulasan", "Rating"]]
 y = df["Frekuensi Muncul"]
 
+st.subheader("Visualisasi Koefisien Regresi")
+
+fig, ax = plt.subplots()
+ax.bar(coef_df["Variabel"], coef_df["Koefisien"])
+ax.set_ylabel("Nilai Koefisien")
+ax.set_xlabel("Variabel")
+st.pyplot(fig)
 model = LinearRegression()
 model.fit(X, y)
+
+st.subheader("Perbandingan Frekuensi Muncul Berdasarkan Jenis Toko")
+
+avg_visibility = df.groupby("Jenis Toko")["Frekuensi Muncul"].mean()
+
+fig2, ax2 = plt.subplots()
+avg_visibility.plot(kind="bar", ax=ax2)
+ax2.set_ylabel("Rata-rata Frekuensi Muncul")
+st.pyplot(fig2)
 
 coef_df = pd.DataFrame({
     "Variabel": X.columns,
