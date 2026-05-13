@@ -9,7 +9,8 @@ st.set_page_config(page_title="RVA Dashboard", layout="wide")
 st.title("Recommender Visibility Analyzer (RVA)")
 st.write("Dashboard analisis fairness visibilitas produk UMKM pada marketplace Shopee.")
 
-df = pd.read_csv("data_observasi_shopee.csv")
+df = pd.read_csv("data_observasi_shopee.csv", sep=";")
+df.columns = df.columns.str.strip()
 
 st.subheader("Data Observasi Produk")
 st.dataframe(df)
